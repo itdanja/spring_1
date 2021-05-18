@@ -1,14 +1,21 @@
 package spring;
 
 
+import lombok.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.web.bind.annotation.GetMapping;
+import spring.domain.MemberEntity;
+
+import javax.persistence.*;
 
 @SpringBootApplication // @ 어노테이션 주입  : 해당클래스에게 스프링부트 프로그램 제공
 public class Start {
     public static void main(String[] args) {
         SpringApplication.run( Start.class  , args );
                             // 현재 클래스명.class , 메인 배열명
+
     }
 //    이클립스 : java 에디터 	무료
 //    인텔리제이 : java 에디터 	java만 무료 / 나머지 유료
@@ -46,6 +53,58 @@ public class Start {
 //    클라이언트 <----DTO---> controller <------DTO------> Service <-----DTO-------> Repository  <------DOMAIN-------> DB
 //			*제어			*java로직			* DB인터페이스
 //    페이지요청/응답		   서비스
+
+//  10. 실행시 get , bulider 등 롬북에서 오류 발생시
+//      - 터미널에  그레이들 버전 내리기
+        // gradlew wrapper --gradle-version 4.10.2
+
+
+
+
+
+    //  라이브러리
+////        1.//  스프링부트 웹 라이브러리 가져오기 =>  관련된 @ 제공 받을수 있다
+////        compile('org.springframework.boot:spring-boot-starter-web')
+//                 1. @SpringBootApplication :  스프링부트 관련 어노테이션
+//                2. @GetMapping :
+//                3. @PostMapping :
+//
+////        2.// 타임리프 : java <----->  프론트엔드 연결
+////        compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+//                // 태그 안에서 사용
+//                1. <html xmlns:th="http://www.thymeleaf.org" lang="en">
+//
+////        3.// JPA : 관계형 데이터베이스 사용
+////        compile('org.springframework.boot:spring-boot-starter-data-jpa')
+//                1. @Entity // DB 테이블 관계
+//                    1. @Id // javax // 기본키
+//                    2. @GeneratedValue(strategy = GenerationType.IDENTITY)  // auto
+//                    3. @Column // 필드 속성
+//                2. 인터페이스 생성
+//                    1.  interface MemberRepository extends JpaRepository<엔티티명 , 엔티티 기본키의 자료형>
+//                3. sql 메소드
+//                    1. Repository.save : 저장
+//                    2. Repository.findAll() : 모든 레코드 출력
+//
+////        4.// H2 : 관계형 데이터베이스 관리 시스템 = mysql워크벤치 역활
+////        compile('com.h2database:h2')
+//
+////        5.// 롬복 : 생성자 , get , set , 필드 등
+////        compile('org.projectlombok:lombok')
+//                1. @Getter
+//                2. @Setter
+//                3. @Builder
+//                4. @NoArgsConstructor
+//                5. @RequiredArgsConstructor
+
+
+
+
+
+
+
+
+
 
 
 
