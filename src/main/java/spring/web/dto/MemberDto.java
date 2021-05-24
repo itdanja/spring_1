@@ -3,7 +3,7 @@ package spring.web.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import spring.domain.MemberEntity;
+import spring.domain.member.MemberEntity;
 
 @Getter // 롬복 어노테이션
 @Setter

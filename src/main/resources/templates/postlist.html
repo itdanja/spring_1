@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/header :: header_h">
+
+<meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:replace="/header :: header"></div>
+    <table>
+        <tr>
+            <th> 번호 </th>
+            <th> 제목 </th>
+            <th> 작성자 </th>
+            <th> 작성일 </th>
+            <th> 조회수 </th>
+        </tr>
+        <tr th:each ="postDto : ${postDtos}">
+            <td th:text="${postDto.id}"></td>
+            <td th:text="${postDto.title}"></td>
+            <td th:text="${postDto.name}"></td>
+            <td th:text="${postDto.createDate}"></td>
+            <td th:text="${postDto.count}"></td>
+        </tr>
+    </table>
+        <a th:href="@{/postwrite}"> 등록 </a>
+
+</body>
+</html>

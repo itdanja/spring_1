@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/header :: header_h">
+
+
 </head>
 <body>
-    <a href="#"> 회원가입 </a>
-    <a href="#"> 로그인 </a>
-    현재 회원목록
-    <table>
-            <tr th:each="memberdto : ${memberDtoList}">
-                <td th:text="${memberdto.name}"> </td>
-            </tr>
-    </table>
-    메인 페이지
+
+    <div th:replace="/header :: header"></div>
+
+    <div class="container">
+        메인 페이지
+        현재 회원목록
+        <table>
+                <tr th:each="memberdto : ${memberDtoList}">
+                    <td th:text="${memberdto.name}"> </td>
+                </tr>
+        </table>
+    </div>
+
 </body>
 </html>

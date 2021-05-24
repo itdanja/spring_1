@@ -11,23 +11,22 @@
         <div class="col-md-5 float-left"> <img width="95%" src="../static/images/mainlogo.jpg"></div>
         <div class="col-md-5 float-left">
 
-            <form method="post" action="/membersignup">
-                <h3> GLAMPING Member signup   </h3>
+                <h3> GLAMPING Member info   </h3>
                 <hr>
                 <div class="form-group">
                     <label> 아이디 </label>
-                    <input type="text" name="memberid" class="form-control">
-                    <label> 비밀번호 </label>
-                    <input type="text" name="password" class="form-control">
+                    <div type="text" name="memberid" class="form-control" th:text="${memberDto.memberid}"></div>
                     <label> 성명 </label>
-                    <input type="text" name="name" class="form-control">
+                    <div type="text" name="name" class="form-control" th:text="${memberDto.name}"></div>
                     <label> 이메일 </label>
-                    <input type="text" name="email" class="form-control">
+                    <div type="text" name="email" class="form-control" th:text="${memberDto.email}"></div>
+
                 </div>
                 <div class="form-group">
-                  <input type="submit" value="등록" class="btn btn-info">
+                    <a th:href="@{/memberupdate}"> <input type="button" value="회원수정" class="btn btn-info" > </a>
+                    <a th:href="@{/memberdelete}"> <input type="button" value="회원탈퇴" class="btn btn-info"> </a>
                 </div>
-            </form>
+
         </div>
     </div>
 
