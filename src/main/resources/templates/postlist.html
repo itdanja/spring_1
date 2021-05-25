@@ -28,6 +28,60 @@
         </table>
         <a th:if="${session.loginuser !=null}" th:href="@{/postwrite}" class="btn btn-info"> 등록 </a>
         <div th:if="${session.loginuser == null}"> *로그인후 작성 가능합니다 </div>
+
+        <!-- 페이징 처리 -->
+        <div>
+                <!--시작페이지 , 끝페이지 설정-->
+                            <!-- 타임리프 변수 정의 : th:with= -->
+                            <!-- 모델명(리스트).number : 리스트내 객체수 -->
+            <ul class="">
+                <!-- 첫페이지이동 -->
+                <li>
+                    <a th:href="@{/postlist(page=1)}"> << </a>
+                </li>
+                <!-- 이전페이지이동 -->
+                <li>
+                    <a th:href="@{/postlist(page=${ postDtos.number })}"> < </a>
+                    <div th:text="${postDtos.number }"></div>
+                </li>
+                <!-- 페이지번호 -->
+                <li></li>
+                <!-- 다음페이지이동 -->
+                <li>
+                    <a th:href="@{/postlist(page=${postDtos.number+2})}"> > </a>
+                </li>
+                <!-- 마지막페이지 이동 -->
+                <li>
+                    <a th:href="@{/postlist(page=${postDtos.totalPages})}"> >> </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
+
 </body>
 </html>

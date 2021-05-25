@@ -31,9 +31,10 @@
                 <td   colspan="2" th:text="${postDto.contents}"></td>
             </tr>
         </table>
+        <a class="btn btn-info" th:href="@{/postlist}">목록</a>
         <div th:if="${session.loginuser !=null }">
-            <a th:if="${session.loginuser.memberid == postDto.name }" class="btn btn-info">수정</a>
-            <a th:if="${session.loginuser.memberid == postDto.name }" class="btn btn-info">삭제</a>
+            <a th:if="${session.loginuser.memberid == postDto.name }" class="btn btn-info" th:href="@{'/postupdate/'+${postDto.id}}">수정</a>
+            <a th:if="${session.loginuser.memberid == postDto.name }" class="btn btn-info" th:href="@{'/postdelete/'+${postDto.id}}">삭제</a>
         </div>
     </div>
 </body>
