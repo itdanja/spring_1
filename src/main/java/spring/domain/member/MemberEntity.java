@@ -13,7 +13,7 @@ import spring.web.dto.MemberDto;
 import javax.persistence.*;
 
 @Getter // 롬북을 이용한 Getter 메소드 자동 생성
-@Entity(name = "member") // DB 테이블 관계
+@Entity // DB 테이블 관계
 @NoArgsConstructor // 기본생성자 제공
 public class MemberEntity extends BasTime {
 

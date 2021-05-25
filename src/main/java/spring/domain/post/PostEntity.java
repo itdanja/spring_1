@@ -45,6 +45,6 @@ public class PostEntity extends BasTime {
     }
     // 조회수 증가 메소드
     public void countup(){
-        this.count++;
+        this.count++ ;
     }
 }

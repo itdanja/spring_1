@@ -1,13 +1,16 @@
 package spring.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import spring.domain.post.PostEntity;
 import spring.domain.post.PostRepository;
 import spring.web.dto.PostDto;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor // final 상수 => 자동 정의
@@ -43,6 +46,34 @@ public class PostService {
     }
 
     // 3. 게시물 개별 출력
+    public PostDto postget( Long id ){
+
+        // 1. 해당 id의 엔티티 찾기
+        Optional<PostEntity> optionalPostEntity
+                =  postRepository.findById(id);
+        // 2. 엔티티를 가져오기
+        PostEntity postEntity
+                = optionalPostEntity.get();
+        // 3. dto 변환
+        return PostDto.builder()
+                .id( postEntity.getId() )
+                .title( postEntity.getTitle() )
+                .contents(postEntity.getContents())
+                .name(postEntity.getName() )
+                .createDate( postEntity.getCreateDate() )
+                .count( postEntity.getCount() ).build();
+    }
+
+    // 4. 조회수 처리
+    @Transactional // 트랜잭션
+    public void countup( Long id ){
+        // 1.엔티티 찾기
+        Optional<PostEntity> optionalPostEntity =  postRepository.findById(id);
+        // 2. 엔티티 가져오기
+        PostEntity postEntity = optionalPostEntity.get();
+        // 3. 조회수 증가 메소드 호출
+        postEntity.countup();
+    }
 
     // 4. 게시물 수정
 

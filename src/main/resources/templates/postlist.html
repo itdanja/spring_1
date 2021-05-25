@@ -7,23 +7,27 @@
 </head>
 <body>
     <div th:replace="/header :: header"></div>
-    <table>
-        <tr>
-            <th> 번호 </th>
-            <th> 제목 </th>
-            <th> 작성자 </th>
-            <th> 작성일 </th>
-            <th> 조회수 </th>
-        </tr>
-        <tr th:each ="postDto : ${postDtos}">
-            <td th:text="${postDto.id}"></td>
-            <td th:text="${postDto.title}"></td>
-            <td th:text="${postDto.name}"></td>
-            <td th:text="${postDto.createDate}"></td>
-            <td th:text="${postDto.count}"></td>
-        </tr>
-    </table>
-        <a th:href="@{/postwrite}"> 등록 </a>
 
+    <div class="container">
+        <table class="table table-hover table-striped">
+            <tr clss="thead-strong">
+                <th> 번호 </th>
+                <th> 제목 </th>
+                <th> 작성자 </th>
+                <th> 작성일 </th>
+                <th> 조회수 </th>
+            </tr>
+            <tr th:each ="postDto : ${postDtos}">
+                <td th:text="${postDto.id}"></td>
+                <td><a th:href="@{'/postview/'+${postDto.id}}"><span th:text="${postDto.title}"></span></a></td>
+                <td th:text="${postDto.name}"></td>
+                <td th:text="${#temporals.format( postDto.createDate , 'yy-MM-dd HH:mm') }"></td>
+                <!-- 타임리프 날짜형식함수 #temporals.format( 데이터 , 형식 )  -->
+                <td th:text="${postDto.count}"></td>
+            </tr>
+        </table>
+        <a th:if="${session.loginuser !=null}" th:href="@{/postwrite}" class="btn btn-info"> 등록 </a>
+        <div th:if="${session.loginuser == null}"> *로그인후 작성 가능합니다 </div>
+    </div>
 </body>
 </html>
