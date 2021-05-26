@@ -11,7 +11,6 @@ public class Start {
     public static void main(String[] args) {
         SpringApplication.run( Start.class  , args );
                             // 현재 클래스명.class , 메인 배열명
-
     }
 //    이클립스 : java 에디터 	무료
 //    인텔리제이 : java 에디터 	java만 무료 / 나머지 유료

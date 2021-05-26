@@ -15,6 +15,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class IndexController {
     private final MemberService memberService ;
+    
+    
     @GetMapping("/") // 요청 URL 만들기  [ ip주소:port번호 ]
     public String index(Model model){ // 메소드
         // 회원목록 서비스
