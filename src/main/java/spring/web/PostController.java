@@ -13,6 +13,7 @@ import spring.domain.post.PostEntity;
 import spring.service.PostService;
 import spring.web.dto.PostDto;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -23,9 +24,13 @@ public class PostController {
 
     // 1. 게시판 페이지 요청
     @GetMapping("/postlist")
-    public String postlist(Model model , @PageableDefault Pageable pageable){  // 모델 : 프론트에게 데이터 전달
+    public String postlist(Model model , @PageableDefault Pageable pageable , HttpServletRequest request ){  // 모델 : 프론트에게 데이터 전달
 
-        Page<PostEntity> postEntities = postService.postlist( pageable );
+
+        String keyword = request.getParameter("keyword");
+        String search = request.getParameter("search");
+
+        Page<PostEntity> postEntities = postService.postlist( pageable , keyword , search  );
 
         model.addAttribute( "postDtos" , postEntities );
 
@@ -34,7 +39,6 @@ public class PostController {
 //        List<PostDto> postDtos = postService.postlist();
 //        model.addAttribute( "postDtos" , postDtos); // 모델 이름 , 모델에 넣을 변수/객체
 //        return "postlist";
-
 
     }
     // 2. 게시물 등록 페이지 요청
@@ -85,6 +89,20 @@ public class PostController {
         return "redirect:/postlist"; // URL 요청
     }
 
+    // 7. 검색 처리
+    @PostMapping("/postsearch")
+    public String postsearch_c(HttpServletRequest request , Model model , @PageableDefault Pageable pageable){
+                                    // jsp 와 다르게 request 객체 만들기
 
+        String keyword = request.getParameter("keyword");
+        String search = request.getParameter("search");
+                //        System.out.println(keyword); // request 확인
+                //        System.out.println(search); // request 확인
+        Page<PostEntity> postEntities = postService.postlist( pageable , keyword , search );
+        model.addAttribute( "postDtos" , postEntities );
+
+        return "postlist";
+
+    }
 
 }

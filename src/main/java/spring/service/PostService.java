@@ -11,7 +11,6 @@ import spring.domain.post.PostRepository;
 import spring.web.dto.PostDto;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +26,7 @@ public class PostService {
         postRepository.save( postDto.toEntity() );
     }
     // 2. 게시물 모든 출력
-    public Page<PostEntity> postlist(Pageable pageable){
+    public Page<PostEntity> postlist(Pageable pageable ,String keyword , String search  ){
 
         // 현재 페이지
         int page = (pageable.getPageNumber() == 0 ) ? 0 : (pageable.getPageNumber()-1);
@@ -36,6 +35,9 @@ public class PostService {
         pageable = PageRequest.of( page , 5 , new Sort( Sort.Direction.DESC , "id"));
                     // PageRequest.of( 현재페이지 , 페이지당 게시글수 , sort )
         // 현재 페이지의 게시물 찾기
+        if( keyword!=null || search !=null ) {
+            return postRepository.findAllsearch( search , pageable);
+         }
         return postRepository.findAll( pageable );
                 //        // 모든 entity 반환
                 //        List<PostEntity> postEntities =  postRepository.findAll();
@@ -108,5 +110,6 @@ public class PostService {
         // 3. 삭제 처리
         postRepository.delete( postEntity );
     }
+
 
 }
