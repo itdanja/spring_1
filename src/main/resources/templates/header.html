@@ -28,14 +28,18 @@
                 </ul>
             </div>
             <div class="nav navbar-nav">
-                <ul class="nav navbar-nav navbar-right" >
-                    <li  class="header_li" style="font-size:15px; color:gray;" th:if="${session.loginuser !=null }" th:text="${session.loginuser.memberid}"></li>
-                    <li  class="header_li" th:if="${session.loginuser ==null }"><a th:href="@{/membersignup}"> 회원가입 </a></li>
-                    <li  class="header_li" th:if="${session.loginuser ==null }"><a th:href="@{/memberlogin}"> 로그인 </a></li>
-                    <li  class="header_li" th:if="${session.loginuser !=null }"><a th:href="@{/memberinfo}"> 회원정보 </a></li>
-                    <li  class="header_li" th:if="${session.loginuser !=null }"><a th:href="@{/memberlogout}">로그아웃</a></li>
+                <ul class="nav navbar-nav">
+                    <ul  class="nav navbar-nav navbar-right"  th:if="${session.loginuser==null}"> <!-- 로그인이 없는경우 -->
+                        <li  class="header_li" ><a th:href="@{/membersignup}"> 회원가입 </a></li>
+                        <li  class="header_li" ><a th:href="@{/memberlogin}"> 로그인 </a></li>
+                    </ul>
+                    <ul  class="nav navbar-nav navbar-right"  th:if="${session.loginuser!=null}"> <!-- 로그인이 했을을경우 -->
+                       <li  class="header_li" style="font-size:15px; color:gray;"  th:text="${session.loginuser.memberid}"></li>
+                        <li  class="header_li" ><a th:href="@{/memberinfo}"> 회원정보 </a></li>
+                        <li  class="header_li" ><a th:href="@{/memberlogout}">로그아웃</a></li>
+                        <li  class="header_li" th:if="${session.loginuser.memberid =='admin'}"><a th:href="@{/adminpage}">관리자</a></li>
+                    </ul>
                 </ul>
-
             </div>
         </div>
         </div>

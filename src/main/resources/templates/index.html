@@ -19,6 +19,8 @@
 
         <table>
             <tr th:each="cardDto : ${cardDtoList}">
+                    <!-- th:each = 임시 변수명선언 : ${ 리스트명[모델명] } -->
+                    <!-- for( int temp : 리스트명 ) -->
                 <td th:text="${cardDto.id}"> </td>
                 <td th:text="${cardDto.cardname}"> </td>
                 <td th:text="${cardDto.cardcompany}"> </td>

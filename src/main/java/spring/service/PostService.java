@@ -36,8 +36,14 @@ public class PostService {
                     // PageRequest.of( 현재페이지 , 페이지당 게시글수 , sort )
         // 현재 페이지의 게시물 찾기
         if( keyword!=null || search !=null ) {
-            return postRepository.findAllsearch( search , pageable);
-         }
+
+            if( keyword.equals("title")) return postRepository.findAlltitle(search, pageable);
+            if( keyword.equals("contents")) return postRepository.findAllcontents(search, pageable);
+            if( keyword.equals("name")) return postRepository.findAllname(search, pageable);
+            if( keyword.equals("id")) return postRepository.findAllid( Long.parseLong( search ), pageable);
+
+
+        }
         return postRepository.findAll( pageable );
                 //        // 모든 entity 반환
                 //        List<PostEntity> postEntities =  postRepository.findAll();
