@@ -24,7 +24,6 @@ public class AdminController {
 
     @GetMapping("/admincardlist")
     public String admincardlist(Model model){
-
         List<CardDto> cardDtos =  cardService.cardDtoList();
         model.addAttribute("cardDtos" , cardDtos );
         return "admincardlist";

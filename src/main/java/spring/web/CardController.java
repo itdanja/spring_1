@@ -32,7 +32,7 @@ public class CardController {
                                 // => MultipartFile 사용하기
                                     // file 변수 설정 :  @RequestParam(변수명)
         // 이미지 저장 [ 업로드 ]
-        String 업로드경로 = "C:\\Users\\User\\Desktop\\spring_7\\src\\main\\resources\\static\\images";
+        String 업로드경로 = "C:\\Users\\User\\Desktop\\spring_8\\src\\main\\resources\\static\\images";
             //   \ : 제어문자  \n \t
             //   \\ :  경로 \
         String 파일경로 = 업로드경로 +"\\"+files.getOriginalFilename();
@@ -43,7 +43,6 @@ public class CardController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         CardDto cardDto = CardDto.builder()
                 .cardname( request.getParameter("cardname"))
                 .cardcompany( request.getParameter("cardcompany"))
@@ -52,7 +51,7 @@ public class CardController {
                                     // 파일명 저장
         cardService.cardsave(cardDto);
 
-        return "index";
+        return "redirect:/admincardlist";
     }
 
 }
