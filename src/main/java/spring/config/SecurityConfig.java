@@ -16,13 +16,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final Oauth2Service oauth2Service;
 
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/css/**", "/js/**", "/images/**", "/fonts/**", "/templates/**");
-    }
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
