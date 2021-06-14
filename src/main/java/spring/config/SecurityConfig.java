@@ -3,6 +3,7 @@ package spring.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -14,6 +15,13 @@ import spring.service.Oauth2Service;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final Oauth2Service oauth2Service;
+
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/css/**", "/js/**", "/images/**", "/fonts/**", "/templates/**");
+    }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
