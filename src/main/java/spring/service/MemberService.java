@@ -76,9 +76,9 @@ public class MemberService {
 
     // 회원 개별 찾기
     @Transactional // javax
-    public MemberDto memberfind( Long id){
+    public MemberDto memberfind( String email){
         // 1. 해당 회원번호의 엔티티 찾기
-        Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByemail(email);
                                                             // findById 의 리턴값이 Optional
         // 2. 찾은 엔티티 가져오기
         MemberEntity memberEntity = optionalMemberEntity.get();
@@ -94,9 +94,9 @@ public class MemberService {
 
     // 회원 탈퇴
     @Transactional // javax
-    public int memberdelete( Long id ){
+    public int memberdelete( String email ){
 
-         Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
+         Optional<MemberEntity> optionalMemberEntity = memberRepository.findByemail(email);
 
          MemberEntity memberEntity = optionalMemberEntity.get();
 
@@ -106,10 +106,10 @@ public class MemberService {
 
     // 회원 수정 처리
     @Transactional // javax
-    public int memberupdate( Long id , MemberDto updateDto ){
+    public int memberupdate( String email , MemberDto updateDto ){
 
         // 1. db에서 회원찾기
-        Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByemail(email);
         // 2. 찾았으면 엔티티 가져오기
         MemberEntity memberEntity = optionalMemberEntity.get();
         // 3. 업데이트 처리 => 메소드 호출

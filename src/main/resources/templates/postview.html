@@ -33,9 +33,32 @@
         </table>
         <a class="btn btn-info" th:href="@{/postlist}">목록</a>
         <div th:if="${session.loginuser !=null }">
-            <a th:if="${session.loginuser.memberid == postDto.name }" class="btn btn-info" th:href="@{'/postupdate/'+${postDto.id}}">수정</a>
-            <a th:if="${session.loginuser.memberid == postDto.name }" class="btn btn-info" th:href="@{'/postdelete/'+${postDto.id}}">삭제</a>
+            <a th:if="${session.loginuser.name == postDto.name }" class="btn btn-info" th:href="@{'/postupdate/'+${postDto.id}}">수정</a>
+            <a th:if="${session.loginuser.name == postDto.name }" class="btn btn-info" th:href="@{'/postdelete/'+${postDto.id}}">삭제</a>
         </div>
+
+        <!-- 댓글 작성 form --->
+        <form action="/replywrite" method="post">
+            <!-- 댓글 작성시 작성자[세션] , 게시물번호[현재post번호] 같이 보내기  -->
+            <input type="hidden" name="replyname" th:value="${postDto.name}">
+            <input type="hidden" name="postid" th:value="${postDto.id}">
+            <table>
+                <tr>
+                    <td><textarea name="replycontents"></textarea></td>
+                    <td><input type="submit" value="댓글등록" class="btn btn-info"></td>
+                </tr>
+            </table>
+        </form>
+        <!--댓글 표시 table -->
+        <table>
+        <tr th:each ="replyDto : ${replyDtos}">
+            <td><input type="text" th:value="${replyDto.id}" name="id"> </td>
+            <td><input type="text" th:value="${replyDto.postid}" name="postid"> </td>
+            <td> <input type="text" th:value="${replyDto.replycontents}" name="replycontents"> </td>
+            <td><input type="text" th:value="${replyDto.replyname}" name="replyname"> </td>
+            <td><a th:href="@{/replydelete(id=${replyDto.id},postid=${replyDto.postid})}">삭제</span></a></td>
+        </tr>
+        </table>
     </div>
 </body>
 </html>

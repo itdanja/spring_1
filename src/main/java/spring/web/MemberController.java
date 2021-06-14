@@ -63,7 +63,7 @@ public class MemberController {
         // 현재 로그인된 정보
         MemberDto temp =  ( MemberDto) session.getAttribute("loginuser");
         // 현재 로그인된 정보의 dto 가져오기
-        MemberDto memberDto =  memberService.memberfind( temp.getId() );
+        MemberDto memberDto =  memberService.memberfind( temp.getEmail() );
         // model 를 이용한 프론트에게 dto 넘기기
         model.addAttribute( "memberDto" , memberDto );
         return "memberinfo"; // 타임리프 HTML 반환
@@ -81,21 +81,20 @@ public class MemberController {
         // 세션 가져오기
         MemberDto memberDto =(MemberDto)session.getAttribute("loginuser");
         // 세션의 회원번호 가져오기
-        Long id = memberDto.getId();
+        String email = memberDto.getEmail();
         // 삭제 서비스 넘기기
-        memberService.memberdelete( id );
+        memberService.memberdelete( email );
         // 세션 초기화
         session.invalidate();
         return "redirect:/"; // 해당 url 이동
     }
-
     // 회원 수정 페이지 요청
     @GetMapping("/memberupdate") // 요청 URL 정의 => 메소드 실행
     public String memberupdate( Model model){
         // 현재 로그인된 정보
         MemberDto temp =  ( MemberDto) session.getAttribute("loginuser");
         // 현재 로그인된 정보의 dto 가져오기
-        MemberDto memberDto =  memberService.memberfind( temp.getId() );
+        MemberDto memberDto =  memberService.memberfind( temp.getEmail() );
         // model 를 이용한 프론트에게 dto 넘기기
         model.addAttribute( "memberDto" , memberDto );
         return "memberupdate"; // 타임리프 HTML 반환
@@ -107,9 +106,10 @@ public class MemberController {
         // 세션 가져오기
         MemberDto memberDto =(MemberDto)session.getAttribute("loginuser");
         // 세션의 회원번호 가져오기
-        Long id = memberDto.getId();
-        memberService.memberupdate( id , updateDto );
+        String email = memberDto.getEmail();
+        memberService.memberupdate( email , updateDto );
         return "redirect:/memberinfo"; // URL 이동
+
     }
 
 }

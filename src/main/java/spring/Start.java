@@ -121,5 +121,34 @@ public class Start {
 //                4. @NoArgsConstructor
 //                5. @RequiredArgsConstructor
 
+//
+//    *API : 게시판, 회원 , 제품 , 댓글
+//    // 이동되는 필드[변수] 많을경우
+//    DTO : 여러개 이동되는 필드를 묶음처리  Data Transfer Object
+//    entity : DB 테이블 맵핑[연결]
+//            ------------------------- MVC 모델 -------------------------------
+//            1. 프론트[ 클라이언트 : html ]
+//    입력
+//	2. controller [ 제어 ]
+//    프론트 <----> service  연결
+//	3. service [ 로직 ]
+//    CRUD 등
+//	4. Repository
+//    DB 연결 인터페이스
+//	5. DB
+//------------------------ 1. 엔티티 설계 --------------------------
+//            1.Replyentity : 클래스 설계
+//		1. 댓글번호 : 식별용 => id [ 기본키 , 자동번호 ]
+//            2. 댓글내용 : replycontents => String
+//		3. 댓글작성자 : replyname => String
+//		4. 게시판번호 : postid => Long
+//		5. 작성일/수정일 => BaseTime 상속받기
+//	2. Repository : 인터페이스
+//-----------------------2. service <-----> controller   -------------------
+//            1.
+//
+
+
+
 
 }

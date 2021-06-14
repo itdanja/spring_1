@@ -6,12 +6,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import spring.domain.post.PostEntity;
 import spring.service.PostService;
+import spring.service.ReplyService;
 import spring.web.dto.PostDto;
+import spring.web.dto.ReplyDto;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -21,6 +21,7 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+    private final ReplyService replyService;
 
     // 1. 게시판 페이지 요청
     @GetMapping("/postlist")
@@ -55,18 +56,26 @@ public class PostController {
     }
 
     // 4. 게시물 상세페이지 요청
-    @GetMapping("/postview/{id}")
-    public String postview(@PathVariable Long id  , Model model ) {
-                           // 경로(url) 상에 변수 가져오기
-        // 조회수 처리
-        postService.countup(id);
+    @RequestMapping( value = "/postview" , method = RequestMethod.GET)
+    public String postview_c( @RequestParam("id") Long id ,  @RequestParam("count") int count  , Model model ) {
 
+        // 경로(url) 상에 변수 가져오기
+        // 조회수 처리
+        if( count != -1 ) postService.countup(id);
+
+        // 해당 게시물 출력
         PostDto postDto = postService.postget( id );
         model.addAttribute( "postDto" , postDto);
 
-        return "postview";
+        // 댓글 출력하기
+        List<ReplyDto> replyDtos =  replyService.replyDtoList( postDto.getId() );
+        model.addAttribute("replyDtos" , replyDtos);
 
+        // model : html에 데이터 전달 ( 모델명 , 데이터 )
+        return "postview";
     }
+
+
     // 4. 게시물 수정 페이지 요청
     @GetMapping("/postupdate/{id}")
     public String postupdate(@PathVariable Long id , Model model ){

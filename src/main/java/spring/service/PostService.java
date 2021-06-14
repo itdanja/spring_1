@@ -93,6 +93,7 @@ public class PostService {
         PostEntity postEntity = optionalPostEntity.get();
         // 3. 조회수 증가 메소드 호출
         postEntity.countup();
+
     }
 
     // 4. 게시물 수정
