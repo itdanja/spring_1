@@ -19,7 +19,7 @@ public class IndexController {
     private final MemberService memberService ;
     private final CardService cardService ;
 
-    @GetMapping("") // 요청 URL 만들기  [ ip주소:port번호 ]
+    @GetMapping("/") // 요청 URL 만들기  [ ip주소:port번호 ]
     public String index(Model model){ // 메소드
         // 회원목록 서비스
         List<MemberDto> memberDtoList = memberService.memberlist();
